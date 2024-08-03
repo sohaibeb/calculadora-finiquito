@@ -33,29 +33,28 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
     return;
   }
 
-  // Calcular los años trabajados
-  const tiempoTrabajado = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24 * 365.25); // Utiliza 365.25 para considerar años bisiestos
+  const tiempoTrabajado = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24 * 365);
   const anosTrabajados = Math.floor(tiempoTrabajado);
   const salarioDiario = salarioBruto / 365;
 
-  // Calcular las vacaciones pendientes
-  const diasVacacionesPendientes = diasVacaciones;
+  // Deducir proporcionalmente los días de vacaciones por los días de huelga
+  const mesesHuelga = diasHuelga / 30;
+  const deduccionVacaciones = mesesHuelga * 2.5;
+  const diasVacacionesPendientes = diasVacaciones - deduccionVacaciones;
   const pagoVacaciones = diasVacacionesPendientes * salarioDiario;
 
-  // Calcular la indemnización
   let indemnizacion = 0;
 
   if (tipoDespido === 'objetivo') {
-    indemnizacion = 20 * salarioDiario * anosTrabajados;
+    indemnizacion = 20 * anosTrabajados * salarioDiario;
   } else if (tipoDespido === 'improcedente') {
-    const indemnizacionPorAño = 33 * salarioDiario;
-    indemnizacion = Math.min(indemnizacionPorAño * anosTrabajados, 24 * salarioDiario * 30); // Máximo de 24 mensualidades
+    indemnizacion = 33 * anosTrabajados * salarioDiario;
+  } else if (tipoDespido === 'procedente') {
+    indemnizacion = 0; // No hay indemnización para despido procedente
   }
 
-  // Calcular el finiquito total
   const finiquitoTotal = pagoVacaciones + indemnizacion;
 
-  // Mostrar resultados
   document.getElementById('resultado').innerHTML = `
     <h4>Resultado del finiquito:</h4>
     <p>Pago por vacaciones no disfrutadas: ${pagoVacaciones.toFixed(2)} €</p>
