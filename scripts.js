@@ -33,32 +33,61 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
     return;
   }
 
-  const tiempoTrabajado = (fechaFin - fechaInicio) / (1000 * 60 * 60 * 24 * 365);
-  const anosTrabajados = Math.floor(tiempoTrabajado);
   const salarioDiario = salarioBruto / 365;
 
-  // Deducir proporcionalmente los días de vacaciones por los días de huelga
-  const mesesHuelga = diasHuelga / 30;
-  const deduccionVacaciones = mesesHuelga * 2.5;
-  const diasVacacionesPendientes = diasVacaciones - deduccionVacaciones;
-  const pagoVacaciones = diasVacacionesPendientes * salarioDiario;
+  // Cálculo de días de indemnización
+  let diasIndemnizacion = 0;
+  let diasIndemnizacionPorAnio = [];
 
-  let indemnizacion = 0;
+  let currentDate = new Date(fechaInicio);
+  const endYear = fechaFin.getFullYear();
 
-  if (tipoDespido === 'objetivo') {
-    indemnizacion = 20 * anosTrabajados * salarioDiario;
-  } else if (tipoDespido === 'improcedente') {
-    indemnizacion = 33 * anosTrabajados * salarioDiario;
-  } else if (tipoDespido === 'procedente') {
-    indemnizacion = 0; // No hay indemnización para despido procedente
+  while (currentDate <= fechaFin) {
+    const year = currentDate.getFullYear();
+    const startOfYear = new Date(year, 0, 1);
+    const endOfYear = new Date(year, 11, 31);
+    const start = currentDate > startOfYear ? currentDate : startOfYear;
+    const end = fechaFin < endOfYear ? fechaFin : endOfYear;
+
+    const diasEnAnio = Math.floor((end - start + 1) / (1000 * 60 * 60 * 24));
+    const indemnizacionAnual = Math.min(diasEnAnio, 365) / 365 * (tipoDespido === 'objetivo' ? 20 : tipoDespido === 'improcedente' ? 33 : 0); // Días de indemnización redondeados a 20 o 33 según el tipo de despido
+
+    if (diasEnAnio > 0) {
+      diasIndemnizacionPorAnio.push(`<li>${year}: ${Math.round(indemnizacionAnual)} días</li>`);
+    }
+
+    currentDate = new Date(year + 1, 0, 1);
   }
 
+  // Redondear a 20 o 33 días por año completo
+  diasIndemnizacion = diasIndemnizacionPorAnio.reduce((total, item) => {
+    const match = item.match(/(\d+) días/);
+    return total + (match ? parseInt(match[1]) : 0);
+  }, 0);
+
+  const diasVacacionesPendientes = diasVacaciones - (diasHuelga / 365 * diasVacaciones);
+  const pagoVacaciones = diasVacacionesPendientes * salarioDiario;
+  const descuentoHuelga = (diasHuelga / 365 * diasVacaciones) * salarioDiario;
+  const descuentoHuelgaDias = Math.round(diasHuelga / 365 * diasVacaciones); // Días descontados por huelga
+  const indemnizacion = diasIndemnizacion * salarioDiario;
   const finiquitoTotal = pagoVacaciones + indemnizacion;
+
+  // Crear la lista de indemnización por año
+  const listaIndemnizacion = diasIndemnizacionPorAnio.join('');
 
   document.getElementById('resultado').innerHTML = `
     <h4>Resultado del finiquito:</h4>
-    <p>Pago por vacaciones no disfrutadas: ${pagoVacaciones.toFixed(2)} €</p>
-    <p>Indemnización: ${indemnizacion.toFixed(2)} €</p>
+    <ul style="list-style-type: none; padding: 0;">
+      <li>
+        Días de indemnización: ${diasIndemnizacion} días
+        <ul style="list-style-type: none; padding-left: 20px;">
+          ${listaIndemnizacion}
+        </ul>
+      </li>
+      <li>Pago por vacaciones no disfrutadas: ${pagoVacaciones.toFixed(2)} €</li>
+      <li>Descuento de vacaciones por días de huelga: ${descuentoHuelga.toFixed(2)} € (${descuentoHuelgaDias} días)</li>
+      <li>Indemnización: ${indemnizacion.toFixed(2)} €</li>
+    </ul>
     <p><strong>Finiquito total: ${finiquitoTotal.toFixed(2)} €</strong></p>
   `;
 });
