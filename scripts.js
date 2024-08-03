@@ -28,7 +28,7 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
   const diasVacaciones = vacacionesChecked ? parseInt(document.getElementById('diasVacaciones').value) || 30 : 30; // Por defecto 30 días si no se desmarca
   const tipoDespido = document.getElementById('tipoDespido').value;
 
-  if (isNaN(salarioBruto) || isNaN(diasHuelga) || isNaN(diasVacaciones) || isNaN(fechaInicio) || isNaN(fechaFin)) {
+  if (isNaN(salarioBruto) || isNaN(diasHuelga) || isNaN(diasVacaciones) || isNaN(fechaInicio.getTime()) || isNaN(fechaFin.getTime())) {
     document.getElementById('resultado').innerHTML = '<p class="text-danger">Por favor, complete todos los campos correctamente.</p>';
     return;
   }
@@ -37,33 +37,28 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
 
   // Cálculo de días de indemnización
   let diasIndemnizacion = 0;
-  let diasIndemnizacionPorAnio = [];
+  let diasIndemnizacionPorAny = [];
 
   let currentDate = new Date(fechaInicio);
   const endYear = fechaFin.getFullYear();
 
   while (currentDate <= fechaFin) {
-    const year = currentDate.getFullYear();
-    const startOfYear = new Date(year, 0, 1);
-    const endOfYear = new Date(year, 11, 31);
+    const any = currentDate.getFullYear();
+    const startOfYear = new Date(any, 0, 1);
+    const endOfYear = new Date(any, 11, 31);
     const start = currentDate > startOfYear ? currentDate : startOfYear;
     const end = fechaFin < endOfYear ? fechaFin : endOfYear;
 
-    const diasEnAnio = Math.floor((end - start + 1) / (1000 * 60 * 60 * 24));
-    const indemnizacionAnual = Math.min(diasEnAnio, 365) / 365 * (tipoDespido === 'objetivo' ? 20 : tipoDespido === 'improcedente' ? 33 : 0); // Días de indemnización redondeados a 20 o 33 según el tipo de despido
+    const diasEnAny = Math.floor((end - start + 1) / (1000 * 60 * 60 * 24)) + 1;
+    const indemnizacionAnual = (diasEnAny / 365) * (tipoDespido === 'objetivo' ? 20 : tipoDespido === 'improcedente' ? 33 : 0); // Días de indemnización redondeados a 20 o 33 según el tipo de despido
 
-    if (diasEnAnio > 0) {
-      diasIndemnizacionPorAnio.push(`<li>${year}: ${Math.round(indemnizacionAnual)} días</li>`);
+    if (diasEnAny > 0) {
+      diasIndemnizacion += indemnizacionAnual;
+      diasIndemnizacionPorAny.push(`<li>${any}: ${Math.round(indemnizacionAnual)} días</li>`);
     }
 
-    currentDate = new Date(year + 1, 0, 1);
+    currentDate = new Date(any + 1, 0, 1);
   }
-
-  // Redondear a 20 o 33 días por año completo
-  diasIndemnizacion = diasIndemnizacionPorAnio.reduce((total, item) => {
-    const match = item.match(/(\d+) días/);
-    return total + (match ? parseInt(match[1]) : 0);
-  }, 0);
 
   const diasVacacionesPendientes = diasVacaciones - (diasHuelga / 365 * diasVacaciones);
   const pagoVacaciones = diasVacacionesPendientes * salarioDiario;
@@ -72,14 +67,14 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
   const indemnizacion = diasIndemnizacion * salarioDiario;
   const finiquitoTotal = pagoVacaciones + indemnizacion;
 
-  // Crear la lista de indemnización por año
-  const listaIndemnizacion = diasIndemnizacionPorAnio.join('');
+  // Crear la lista de indemnización por any
+  const listaIndemnizacion = diasIndemnizacionPorAny.join('');
 
   document.getElementById('resultado').innerHTML = `
     <h4>Resultado del finiquito:</h4>
     <ul style="list-style-type: none; padding: 0;">
       <li>
-        Días de indemnización: ${diasIndemnizacion} días
+        Días de indemnización: ${Math.round(diasIndemnizacion)} días
         <ul style="list-style-type: none; padding-left: 20px;">
           ${listaIndemnizacion}
         </ul>
