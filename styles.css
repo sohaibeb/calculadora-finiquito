@@ -1,4 +1,89 @@
-body {
-    margin: 20px;
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-content {
+  min-height: calc(100vh - 160px);
+  margin-top: 40px;
+/*padding-bottom: 80px;*/
+  padding-top: 20px;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.glosario {
+  background-color: #f1f1f1;
+  padding: 20px 0;
+  font-size: 0.875rem;
+}
+
+.glosario .container {
+  max-width: 800px;
+}
+
+.glosario h4 {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+}
+
+.glosario dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.glosario dt {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.glosario dd {
+  margin-bottom: 10px;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 767.98px) {
+  .glosario dl {
+    grid-template-columns: 1fr;
   }
-  
+}
+
+.form-row {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 767.98px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+#resultado {
+  margin-bottom: 80px;
+  padding-bottom: 20px;
+}
+
+.importante {
+  color: red;
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: bold;
+}

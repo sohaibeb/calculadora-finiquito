@@ -8,58 +8,118 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h2>Calculadora de Finiquito</h2>
-    <form id="finiquitoForm">
-      <div class="form-group">
-        <label for="salarioBruto">Salario Bruto Anual (€):</label>
-        <input type="number" class="form-control" id="salarioBruto" required min="0">
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="fechaInicio">Fecha de Inicio:</label>
-          <input type="date" class="form-control" id="fechaInicio" required>
+  <div class="main-content">
+    <div class="container">
+      <h2>Calculadora de Finiquito</h2>
+      <form id="finiquitoForm">
+        <div class="form-group">
+          <label for="salarioBruto">Salario Bruto Anual (€):</label>
+          <input type="number" class="form-control" id="salarioBruto" required min="0">
         </div>
-        <div class="form-group col-md-6">
-          <label for="fechaFin">Fecha de Fin:</label>
-          <input type="date" class="form-control" id="fechaFin" required>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" class="form-control" id="fechaInicio" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" class="form-control" id="fechaFin" required>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label>¿Hubo huelga?</label>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="huelgaCheck">
-          <label class="form-check-label" for="huelgaCheck">Sí</label>
+        <div class="form-row align-items-center">
+          <div class="form-group col-md-6">
+            <label>¿Hubo huelga?</label>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="huelgaCheck">
+              <label class="form-check-label" for="huelgaCheck">Sí</label>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="diasHuelga">Días en huelga:</label>
+            <input type="number" class="form-control" id="diasHuelga" disabled min="0">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="diasHuelga">Días en Huelga:</label>
-        <input type="number" class="form-control" id="diasHuelga" disabled min="0">
-      </div>
-      <div class="form-group">
-        <label>¿Vacaciones no disfrutadas?</label>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="vacacionesCheck" checked>
-          <label class="form-check-label" for="vacacionesCheck">Sí</label>
+        <div class="form-row align-items-center">
+          <div class="form-group col-md-6">
+            <label>¿Vacaciones disfrutadas al completo?:</label>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="vacacionesCheck" checked>
+              <label class="form-check-label" for="vacacionesCheck">No</label>
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="diasVacaciones">Días de vacaciones <span class="importante">no</span> disfrutadas:</label>
+            <input type="number" class="form-control" id="diasVacaciones" min="0">
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="diasVacaciones">Días de Vacaciones No Disfrutadas:</label>
-        <input type="number" class="form-control" id="diasVacaciones" min="0">
-      </div>
-      <div class="form-group">
-        <label for="tipoDespido">Tipo de Despido:</label>
-        <select class="form-control" id="tipoDespido" required>
-          <option value="procedente">Procedente</option>
-          <option value="objetivo">Objetivo</option>
-          <option value="improcedente">Improcedente</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Calcular Finiquito</button>
-    </form>
-    <br>
-    <div id="resultado"></div>
+        <div class="form-group">
+          <label for="tipoDespido">Tipo de despido:</label>
+          <select class="form-control" id="tipoDespido" required>
+            <option value="procedente">Procedente</option>
+            <option value="objetivo">Objetivo</option>
+            <option value="improcedente">Improcedente</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular Finiquito</button>
+      </form>
+      <br>
+      <div id="resultado"></div>
+    </div>
   </div>
+
+  <div class="glosario">
+    <div class="container">
+      <h4>Glosario</h4>
+      <dl>
+        <div>
+          <dt>Salario bruto anual</dt>
+          <dd>La cantidad total de dinero que un trabajador gana antes de deducir impuestos y otras retenciones en un año.</dd>
+                    
+          <dt>Finiquito</dt>
+          <dd>Documento que se entrega al trabajador cuando finaliza su relación laboral, detallando el cálculo de indemnizaciones, pagos pendientes, etc.</dd>
+          
+          <dt>Indemnización</dt>
+          <dd>Compensación económica que se otorga a un trabajador en caso de despido.</dd>
+          
+          <dt>Huelga</dt>
+          <dd>Paro temporal en el trabajo por parte de los empleados para expresar una queja o demanda.</dd>
+        </div>
+        <div>
+          <!-- Add more glossary terms and definitions here if needed -->
+          <dt>Vacaciones no disfrutadas</dt>
+          <dd>Días de vacaciones a los que el trabajador tiene derecho y no ha utilizado.</dd>
+          
+          <dt>Despido objetivo</dt>
+          <dd>Despido que se realiza por causas objetivas y justificadas, como razones económicas, técnicas, organizativas o de producción.</dd>
+                    
+          <dt>Despido procedente</dt>
+          <dd>Despido que se realiza por causas justificadas y legales.</dd>
+          
+          <dt>Despido improcedente</dt>
+          <dd>Despido que se realiza sin una causa justificada o de manera incorrecta.</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-start">
+          <p class="mb-0">
+            Powered by 
+            <a href="https://sohaib.eu" target="_blank" rel="nofollow">sohaib.eu</a>
+          </p>
+        </div>
+        <div class="col-12 col-lg-auto text-center text-lg-end">
+          <p class="mb-0">
+            Calculadora Finiquito © 2024 - Proyecto disponible en 
+            <a href="https://github.com/sohaibeb/calculadora-finiquito">GitHub</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
