@@ -19,16 +19,31 @@ document.getElementById('vacacionesCheck').addEventListener('change', function()
 document.getElementById('finiquitoForm').addEventListener('submit', function(event) {
   event.preventDefault();
 
+  // Obtener y validar salario bruto
   const salarioBruto = parseFloat(document.getElementById('salarioBruto').value) || 0;
+  
+  // Asegúrate de que el salario bruto es un número válido
+  if (isNaN(salarioBruto) || salarioBruto < 0) {
+    document.getElementById('resultado').innerHTML = '<p class="text-danger">Por favor, ingrese un salario bruto válido.</p>';
+    return;
+  }
+
   const fechaInicio = new Date(document.getElementById('fechaInicio').value);
   const fechaFin = new Date(document.getElementById('fechaFin').value);
+
+  // Validar fechas
+  if (isNaN(fechaInicio.getTime()) || isNaN(fechaFin.getTime()) || fechaInicio.getFullYear() > 9999 || fechaFin.getFullYear() > 9999) {
+    document.getElementById('resultado').innerHTML = '<p class="text-danger">Por favor, ingrese un rango de fechas válido.</p>';
+    return;
+  }
+
   const huelgaChecked = document.getElementById('huelgaCheck').checked;
   const diasHuelga = huelgaChecked ? parseInt(document.getElementById('diasHuelga').value) || 0 : 0;
   const vacacionesChecked = document.getElementById('vacacionesCheck').checked;
   const diasVacaciones = vacacionesChecked ? parseInt(document.getElementById('diasVacaciones').value) || 30 : 0; // Por defecto 0 días si no se marca el checkbox
   const tipoDespido = document.getElementById('tipoDespido').value;
 
-  if (isNaN(salarioBruto) || isNaN(diasHuelga) || isNaN(diasVacaciones) || isNaN(fechaInicio.getTime()) || isNaN(fechaFin.getTime())) {
+  if (isNaN(diasHuelga) || isNaN(diasVacaciones)) {
     document.getElementById('resultado').innerHTML = '<p class="text-danger">Por favor, complete todos los campos correctamente.</p>';
     return;
   }
