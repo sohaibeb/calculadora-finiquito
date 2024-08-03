@@ -25,7 +25,7 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
   const huelgaChecked = document.getElementById('huelgaCheck').checked;
   const diasHuelga = huelgaChecked ? parseInt(document.getElementById('diasHuelga').value) || 0 : 0;
   const vacacionesChecked = document.getElementById('vacacionesCheck').checked;
-  const diasVacaciones = vacacionesChecked ? parseInt(document.getElementById('diasVacaciones').value) || 30 : 30; // Por defecto 30 días si no se desmarca
+  const diasVacaciones = vacacionesChecked ? parseInt(document.getElementById('diasVacaciones').value) || 30 : 0; // Por defecto 0 días si no se marca el checkbox
   const tipoDespido = document.getElementById('tipoDespido').value;
 
   if (isNaN(salarioBruto) || isNaN(diasHuelga) || isNaN(diasVacaciones) || isNaN(fechaInicio.getTime()) || isNaN(fechaFin.getTime())) {
@@ -60,7 +60,7 @@ document.getElementById('finiquitoForm').addEventListener('submit', function(eve
     currentDate = new Date(any + 1, 0, 1);
   }
 
-  const diasVacacionesPendientes = diasVacaciones - (diasHuelga / 365 * diasVacaciones);
+  const diasVacacionesPendientes = vacacionesChecked ? diasVacaciones - (diasHuelga / 365 * diasVacaciones) : 0;
   const pagoVacaciones = diasVacacionesPendientes * salarioDiario;
   const descuentoHuelga = (diasHuelga / 365 * diasVacaciones) * salarioDiario;
   const descuentoHuelgaDias = Math.round(diasHuelga / 365 * diasVacaciones); // Días descontados por huelga
