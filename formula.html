@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Finiquito</title>
+  <link href="styles.css" rel="stylesheet">
+  <link href="bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .navbar-brand, .nav-link {
+      color: #fff;
+    }
+    .navbar {
+      background-color: #343a40;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="#">Calculadora de Finiquito</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./">Calculadora</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Cálculo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#glosario">Glosario</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-content">
+    <div class="container">
+      <h2>Cómo calcular la indemnización de Finiquito</h2>
+      <div id="instrucciones" class="instrucciones">
+        <p>Para calcular la indemnización por despido, sigue estos pasos:</p>
+        
+        <h4>1. Recolecta la información necesaria</h4>
+        <ul>
+          <li><strong>Salario bruto anual:</strong> El total de dinero que el trabajador recibe antes de impuestos y retenciones en un año.</li>
+          <li><strong>Fecha de inicio y fin del contrato:</strong> Las fechas de inicio y finalización del contrato laboral.</li>
+          <li><strong>Tipo de despido:</strong> Determina si el despido es procedente, objetivo o improcedente.</li>
+          <li><strong>Días de huelga:</strong> Número de días en los que se realizó huelga durante el contrato.</li>
+          <li><strong>Días de vacaciones no disfrutadas:</strong> Días de vacaciones que el trabajador no utilizó.</li>
+        </ul>
+        
+        <h4>2. Tipos de despido y cálculo de indemnización</h4>
+        <p>En España, el cálculo de la indemnización varía según el tipo de despido:</p>
+        <ul>
+          <li><strong>Despido Procedente:</strong> No se otorga indemnización. Este tipo de despido se realiza por causas justificadas, como faltas graves del trabajador.</li>
+          <li><strong>Despido Objetivo:</strong> Se realiza por causas objetivas y justificadas, como razones económicas, técnicas, organizativas o de producción. La indemnización es de 20 días de salario por cada año trabajado.</li>
+          <li><strong>Despido Improcedente:</strong> Se realiza sin una causa justificada o de manera incorrecta. La indemnización es de 33 días de salario por cada año trabajado.</li>
+        </ul>
+
+        <h4>3. Calcular el salario diario</h4>
+        <p>Divide el salario bruto anual entre 365 (días del año) para obtener el salario diario.</p>
+        <div class="ejemplo">
+          <p><strong>Ejemplo:</strong> Si el salario bruto anual es de 30,000 €, el salario diario sería:</p>
+          <p>30,000 € / 365 = 82.19 € (aproximadamente)</p>
+        </div>
+        
+        <h4>4. Determinar el número de días de indemnización</h4>
+        <p>Calcula el número de días de indemnización en función del tipo de despido:</p>
+        <div class="ejemplo">
+          <p><strong>Ejemplo:</strong> Si un trabajador ha estado 5 años en la empresa y el despido es improcedente, la indemnización será:</p>
+          <p>5 años × 33 días/año = 165 días de salario</p>
+        </div>
+        
+        <h4>5. Calcular la indemnización total</h4>
+        <p>Multiplica el número de días de indemnización por el salario diario.</p>
+        <div class="ejemplo">
+          <p><strong>Ejemplo:</strong> Si la indemnización es de 165 días y el salario diario es de 82.19 €, la indemnización total sería:</p>
+          <p>165 días × 82.19 € = 13,561.35 € (aproximadamente)</p>
+        </div>
+        
+        <h4>6. Descontar días de huelga</h4>
+        <p>Si hubo huelga, debes descontar los días de huelga del cálculo de indemnización. Utiliza las siguientes fórmulas para ajustar la indemnización:</p>
+        <div class="ejemplo">
+          <p>Proporción de Días de Huelga = Días de Huelga / Días Totales Trabajados</p>
+          <p>Reducción por Huelga = Días de Indemnización Total × Proporción de Días de Huelga</p>
+          <p>Días de Indemnización Ajustados = Días de Indemnización Total - Reducción por Huelga</p>
+          <p>Indemnización Ajustada = Días de Indemnización Ajustados × Salario Diario</p>
+        </div>
+        <pre>
+        </pre>
+        <div class="ejemplo">
+          <p><strong>Ejemplo:</strong> Si el número de días de indemnización es 165, hay 10 días de huelga, y el salario diario es 82.19 €, el cálculo sería:</p>
+          <p>Proporción de Días de Huelga = 10 / 1,825 ≈ 0.0055</p>
+          <p>Reducción por Huelga = 165 × 0.0055 ≈ 0.91 días</p>
+          <p>Días de Indemnización Ajustados = 165 - 0.91 ≈ 164.09 días</p>
+          <p>Indemnización Ajustada = 164.09 × 82.19 € ≈ 13,485.67 €</p>
+        </div>
+        
+        <h4>7. Calcular las vacaciones no disfrutadas</h4>
+        <p>Según la normativa, se otorgan 30 días de vacaciones al año. Calcula el pago por las vacaciones no disfrutadas:</p>
+        <div class="ejemplo">
+          <p><strong>Ejemplo:</strong> Si un trabajador no disfrutó 10 días de vacaciones y el salario diario es de 82.19 €, el pago por vacaciones sería:</p>
+          <p>10 días × 82.19 € = 821.90 €</p>
+        </div>
+        
+        <h4>8. Verificar con la legislación vigente</h4>
+        <p>Consulta la legislación laboral actual para asegurarte de que el cálculo sea correcto y de que no se te haya pasado por alto ninguna consideración legal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="glosario" class="glosario">
+    <div class="container">
+      <h4>Glosario</h4>
+      <dl>
+        <div>
+          <dt>Salario bruto anual</dt>
+          <dd>La cantidad total de percepciones económicas que un trabajador gana antes de deducir impuestos y otras retenciones en un año. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a26" title="Estatuto Trabajadores ART26"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+                    
+          <dt>Finiquito</dt>
+          <dd>Documento que se entrega al trabajador cuando finaliza su relación laboral, detallando el cálculo de indemnizaciones, pagos pendientes, etc. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a49" title="Estatuto Trabajadores ART49"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+          
+          <dt>Indemnización</dt>
+          <dd>Compensación económica que se otorga a un trabajador en caso de despido. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a49" title="Estatuto Trabajadores ART49"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+          
+          <dt>Huelga</dt>
+          <dd>Paro temporal en el trabajo por parte de los empleados para expresar una queja o demanda. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a4" title="Estatuto Trabajadores ART4"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> <a href="https://app.congreso.es/consti/constitucion/indice/titulos/articulos.jsp?ini=28&tipo=2" title="Constitución Española ART28"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+        </div>
+        <div>
+          <dt>Vacaciones no disfrutadas</dt>
+          <dd>Días de vacaciones a los que el trabajador tiene derecho y no ha utilizado. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a38" title="Estatuto Trabajadores ART38"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a49" title="Estatuto Trabajadores ART49"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+          
+          <dt>Despido objetivo</dt>
+          <dd>Despido que se realiza por causas objetivas y justificadas, como razones económicas, técnicas, organizativas o de producción. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a52" title="Estatuto Trabajadores ART52"><i class="fa-solid fa-arrow-up-right-from-square"></i></a> <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a53" title="Estatuto Trabajadores ART53"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+                    
+          <dt>Despido procedente</dt>
+          <dd>Despido que se realiza por causas justificadas y legales. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a54" title="Estatuto Trabajadores ART54"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+          
+          <dt>Despido improcedente</dt>
+          <dd>Despido que se realiza sin una causa justificada o de manera incorrecta. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430&p=20240522&tn=1#a55" title="Estatuto Trabajadores ART55"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container" id="glosario">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-lg-auto mb-3 mb-lg-0 text-center text-lg-start">
+          <p class="mb-0">
+            Powered by 
+            <a class="text-decoration-none" href="https://sohaib.eu" target="_blank" rel="nofollow">sohaib.eu</a>
+          </p>
+        </div>
+        <div class="col-12 col-lg-auto text-center text-lg-end">
+          <p class="mb-0">
+            Calculadora Finiquito © 2024 - Proyecto disponible en 
+            <a class="text-decoration-none" href="https://github.com/sohaibeb/calculadora-finiquito"><i class="fa-brands fa-github"></i> GitHub</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
